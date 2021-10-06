@@ -2,7 +2,7 @@ CREATE TABLE authors (
     author_id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    create_date TIMESTAMP
+    create_date TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE books (
@@ -10,7 +10,7 @@ CREATE TABLE books (
     name VARCHAR(50) NOT NULL,
     isbn INTEGER UNIQUE CONSTRAINT books_isbn NOT NULL,
     publisher VARCHAR(50),
-    create_date TIMESTAMP
+    create_date TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE authors_books (
@@ -27,7 +27,7 @@ CREATE TABLE reviews (
     commenter_name VARCHAR(50) NOT NULL ,
     comment TEXT,
     rating INTEGER CONSTRAINT reviews_rating CHECK (rating > 0 and rating <= 5),
-    create_date TIMESTAMP,
+    create_date TIMESTAMP DEFAULT NOW(),
     book_id INTEGER
         CONSTRAINT book_fkey
             REFERENCES books ON DELETE CASCADE
