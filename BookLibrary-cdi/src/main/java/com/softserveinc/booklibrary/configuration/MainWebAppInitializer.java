@@ -1,4 +1,4 @@
-package com.softserveinc.booklibrary;
+package com.softserveinc.booklibrary.configuration;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
