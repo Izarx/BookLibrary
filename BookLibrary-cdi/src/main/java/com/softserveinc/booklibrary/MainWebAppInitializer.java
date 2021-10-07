@@ -23,6 +23,6 @@ public class MainWebAppInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic appServlet =
                 sc.addServlet("mvc", new DispatcherServlet(new GenericWebApplicationContext()));
         appServlet.setLoadOnStartup(1);
-        appServlet.addMapping("/");
+        appServlet.addMapping("/*");
     }
 }
