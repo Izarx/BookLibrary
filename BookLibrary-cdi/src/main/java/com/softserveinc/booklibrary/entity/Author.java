@@ -36,7 +36,7 @@ public class Author {
     @CreationTimestamp //implement by hibernate annotation - forbidden change
     @Column(name = "create_date")
     private LocalDateTime createDate;
-
+  
     @ManyToMany
     @JoinTable(
             name = "authors_books",
