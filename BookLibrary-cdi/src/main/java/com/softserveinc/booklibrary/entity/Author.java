@@ -1,9 +1,7 @@
 package com.softserveinc.booklibrary.entity;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
@@ -39,8 +37,6 @@ public class Author {
     @Column(name = "create_date")
     private LocalDateTime createDate;
 
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
     @ManyToMany
     @JoinTable(
             name = "authors_books",
