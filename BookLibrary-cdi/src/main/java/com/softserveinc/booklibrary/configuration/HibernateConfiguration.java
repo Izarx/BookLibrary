@@ -1,6 +1,6 @@
 package com.softserveinc.booklibrary.configuration;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -24,13 +24,24 @@ public class HibernateConfiguration {
         return sessionFactory;
     }
 
+//    @Bean
+//    public DataSource postgresqlDataSource() {
+//        BasicDataSource dataSource = new BasicDataSource();
+//        dataSource.setDriverClassName("org.postgresql.Driver");
+//        dataSource.setUrl("jdbc:postgresql://localhost:5432/booklibrary");
+//        dataSource.setUsername("booklibrary");
+//        dataSource.setPassword("Qwerty12");
+//        return dataSource;
+//    }
+
     @Bean
     public DataSource postgresqlDataSource() {
-        BasicDataSource dataSource = new BasicDataSource();
+        HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/booklibrary");
+        dataSource.setJdbcUrl("jdbc:postgresql://localhost:5432/booklibrary");
         dataSource.setUsername("booklibrary");
         dataSource.setPassword("Qwerty12");
+        dataSource.setMaximumPoolSize(5);
         return dataSource;
     }
 
