@@ -15,7 +15,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class HibernateConfiguration {
 
-    @Bean
+    @Bean(name = "SessionFactory")
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(postgresqlDataSource());
