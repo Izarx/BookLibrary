@@ -8,6 +8,7 @@ CREATE TABLE authors (
 CREATE TABLE books (
     book_id SERIAL PRIMARY KEY,
     name VARCHAR(512) NOT NULL,
+    year_published INTEGER NOT NULL,
     isbn INTEGER UNIQUE CONSTRAINT books_isbn NOT NULL,
     publisher VARCHAR(256),
     create_date TIMESTAMP DEFAULT NOW()

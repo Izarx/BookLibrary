@@ -14,6 +14,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfiguration {
+
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();

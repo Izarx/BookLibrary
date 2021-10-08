@@ -28,13 +28,16 @@ public class Book {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "isbn", nullable = false)
+    @Column(name = "year_published", nullable = false)
+    private Integer yearPublished;
+
+    @Column(name = "isbn", nullable = false, unique = true)
     private Integer isbn;
 
     @Column(name = "publisher")
     private String publisher;
 
-    @CreationTimestamp //look at the author class
+    @CreationTimestamp
     @Column(name = "create_date")
     private LocalDateTime createDate;
 

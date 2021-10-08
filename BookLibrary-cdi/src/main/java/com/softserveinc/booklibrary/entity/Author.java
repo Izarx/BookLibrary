@@ -33,7 +33,7 @@ public class Author {
     @Column(name = "last_name")
     private String lastName;
 
-    @CreationTimestamp //implement by hibernate annotation - forbidden change
+    @CreationTimestamp
     @Column(name = "create_date")
     private LocalDateTime createDate;
 

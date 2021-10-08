@@ -27,19 +27,20 @@ public class Review {
     @Column(name = "review_id", nullable = false)
     private Long reviewId;
 
-    @Column(name = "commenter_name")
+    @Column(name = "commenter_name", nullable = false)
     private String commenterName;
 
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "rating")
+    @Column(name = "rating", nullable = false)
     private Integer rating;
 
-    @CreationTimestamp // loot at the author
+    @CreationTimestamp
+    @Column(name = "create_date")
     private LocalDateTime createDate;
 
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 }

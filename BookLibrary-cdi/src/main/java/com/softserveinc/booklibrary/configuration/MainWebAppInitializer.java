@@ -6,7 +6,6 @@ public class MainWebAppInitializer extends AbstractAnnotationConfigDispatcherSer
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        System.out.println("1");
         return new Class[] {
                 HibernateConfiguration.class
         };
@@ -14,7 +13,6 @@ public class MainWebAppInitializer extends AbstractAnnotationConfigDispatcherSer
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        System.out.println("2");
         return new Class[] {
                 MvcConfiguration.class
         };
@@ -22,7 +20,6 @@ public class MainWebAppInitializer extends AbstractAnnotationConfigDispatcherSer
 
     @Override
     protected String[] getServletMappings() {
-        System.out.println("3");
         return new String[] {
                 "/"
         };
