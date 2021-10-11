@@ -2,9 +2,10 @@ package com.softserveinc.booklibrary.dao.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 import com.softserveinc.booklibrary.dao.EntityRepository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 public abstract class AbstractEntityRepository<T> implements EntityRepository<T> {
 
@@ -14,16 +15,20 @@ public abstract class AbstractEntityRepository<T> implements EntityRepository<T>
 	protected Class<T> type;
 
 	@Override
-	@Transactional
+	@Transactional(propagation = Propagation.MANDATORY)
 	public T create(T entity) {
-		entityManager.persist(entity);
+		if (entity != null) {
+			entityManager.persist(entity);
+		}
 		return entity;
 	}
 
 	@Override
-	@Transactional
+	@Transactional(propagation = Propagation.MANDATORY)
 	public T update(T entity) {
-		entityManager.merge(entity);
+		if (entity != null) {
+			entityManager.merge(entity);
+		}
 		return entity;
 	}
 
@@ -33,7 +38,7 @@ public abstract class AbstractEntityRepository<T> implements EntityRepository<T>
 	}
 
 	@Override
-	@Transactional
+	@Transactional(propagation = Propagation.MANDATORY)
 	public boolean delete(Integer id) {
 		T entity = getById(id);
 		if (entity != null) {
