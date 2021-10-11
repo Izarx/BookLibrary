@@ -33,7 +33,7 @@ public class Book {
 	private Integer yearPublished;
 
 	@Column(name = "isbn", nullable = false, unique = true)
-	private Integer isbn;
+	private Long isbn;
 
 	@Column(name = "publisher")
 	private String publisher;
