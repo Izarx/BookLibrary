@@ -38,7 +38,7 @@ public class Book {
 	@Column(name = "publisher")
 	private String publisher;
 
-	@CreationTimestamp
+	@CreationTimestamp  // forbidden for update and insert
 	@Column(name = "create_date")
 	private LocalDateTime createDate;
 

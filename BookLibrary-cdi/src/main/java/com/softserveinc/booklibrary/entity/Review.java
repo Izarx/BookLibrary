@@ -37,7 +37,7 @@ public class Review {
 	@Column(name = "rating", nullable = false)
 	private Integer rating;
 
-	@CreationTimestamp
+	@CreationTimestamp  // forbidden for update and insert
 	@Column(name = "create_date")
 	private LocalDateTime createDate;
 
