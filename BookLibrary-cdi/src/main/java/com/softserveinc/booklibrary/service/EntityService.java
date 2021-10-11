@@ -7,6 +7,6 @@ public interface EntityService<T> {
 
 	T update(T entity);
 
-	boolean delete(Integer id);
+	void delete(Integer id);
 
 }

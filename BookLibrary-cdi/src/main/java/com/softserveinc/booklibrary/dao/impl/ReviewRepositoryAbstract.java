@@ -10,5 +10,5 @@ public class ReviewRepositoryAbstract extends AbstractEntityRepository<Review> i
 	{
 		type = Review.class;
 	}
-	
+
 }

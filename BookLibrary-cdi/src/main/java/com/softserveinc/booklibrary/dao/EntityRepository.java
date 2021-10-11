@@ -8,6 +8,6 @@ public interface EntityRepository<T> {
 
 	T getById(Integer id);
 
-	boolean delete(Integer id);
+	boolean delete(T entity);
 
 }
