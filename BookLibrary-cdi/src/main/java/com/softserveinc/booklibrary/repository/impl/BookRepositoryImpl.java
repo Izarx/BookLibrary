@@ -1,8 +1,8 @@
-package com.softserveinc.booklibrary.dao.impl;
+package com.softserveinc.booklibrary.repository.impl;
 
 import java.time.LocalDate;
 
-import com.softserveinc.booklibrary.dao.BookRepository;
+import com.softserveinc.booklibrary.repository.BookRepository;
 import com.softserveinc.booklibrary.entity.Book;
 import org.springframework.stereotype.Repository;
 

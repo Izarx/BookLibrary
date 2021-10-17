@@ -1,4 +1,4 @@
-package com.softserveinc.booklibrary.dao;
+package com.softserveinc.booklibrary.repository;
 
 import java.io.Serializable;
 

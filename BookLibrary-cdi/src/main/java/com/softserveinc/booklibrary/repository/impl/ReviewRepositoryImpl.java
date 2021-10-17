@@ -1,7 +1,7 @@
-package com.softserveinc.booklibrary.dao.impl;
+package com.softserveinc.booklibrary.repository.impl;
 
-import com.softserveinc.booklibrary.dao.BookRepository;
-import com.softserveinc.booklibrary.dao.ReviewRepository;
+import com.softserveinc.booklibrary.repository.BookRepository;
+import com.softserveinc.booklibrary.repository.ReviewRepository;
 import com.softserveinc.booklibrary.entity.Book;
 import com.softserveinc.booklibrary.entity.Review;
 import org.springframework.stereotype.Repository;

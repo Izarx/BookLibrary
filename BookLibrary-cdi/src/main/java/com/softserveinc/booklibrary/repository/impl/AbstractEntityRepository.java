@@ -1,4 +1,4 @@
-package com.softserveinc.booklibrary.dao.impl;
+package com.softserveinc.booklibrary.repository.impl;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -6,7 +6,7 @@ import java.lang.reflect.ParameterizedType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.softserveinc.booklibrary.dao.EntityRepository;
+import com.softserveinc.booklibrary.repository.EntityRepository;
 import com.softserveinc.booklibrary.entity.MyAppEntity;
 import com.softserveinc.booklibrary.exception.NotValidEntityException;
 import com.softserveinc.booklibrary.exception.NotValidIdException;

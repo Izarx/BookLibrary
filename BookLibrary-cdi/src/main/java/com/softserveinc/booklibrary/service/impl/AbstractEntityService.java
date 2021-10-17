@@ -2,7 +2,7 @@ package com.softserveinc.booklibrary.service.impl;
 
 import java.io.Serializable;
 
-import com.softserveinc.booklibrary.dao.EntityRepository;
+import com.softserveinc.booklibrary.repository.EntityRepository;
 import com.softserveinc.booklibrary.entity.MyAppEntity;
 import com.softserveinc.booklibrary.exception.NotValidEntityException;
 import com.softserveinc.booklibrary.exception.NotValidIdException;
