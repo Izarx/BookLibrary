@@ -3,7 +3,6 @@ package com.softserveinc.booklibrary.dao.impl;
 import java.lang.reflect.ParameterizedType;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 
 import com.softserveinc.booklibrary.dao.EntityRepository;
