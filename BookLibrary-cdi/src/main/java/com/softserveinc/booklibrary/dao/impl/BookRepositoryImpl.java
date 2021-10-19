@@ -7,7 +7,7 @@ import com.softserveinc.booklibrary.entity.Book;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class BookRepositoryImpl extends AbstractEntityRepository<Book, Integer> implements BookRepository {
+public class BookRepositoryImpl extends AbstractEntityRepository<Book> implements BookRepository {
 
 	@Override
 	public boolean isEntityValid(Book book) {

@@ -21,10 +21,11 @@ import org.hibernate.annotations.CreationTimestamp;
 @Setter
 @Entity
 @Table(name = "authors")
-public class Author implements EntityLibrary<Integer> {
+public class Author implements MyAppEntity<Integer> {
 
 	public static final int FIRST_NAME_LENGTH = 512;
 	public static final int LAST_NAME_LENGTH = 512;
+	private static final long serialVersionUID = -8985579575202450002L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

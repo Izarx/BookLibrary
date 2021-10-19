@@ -20,9 +20,10 @@ import org.hibernate.annotations.CreationTimestamp;
 @Getter
 @Entity
 @Table(name = "reviews")
-public class Review implements EntityLibrary<Integer> {
+public class Review implements MyAppEntity<Integer> {
 
 	public static final int COMMENTER_NAME_LENGTH = 256;
+	private static final long serialVersionUID = -7060539758822800075L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

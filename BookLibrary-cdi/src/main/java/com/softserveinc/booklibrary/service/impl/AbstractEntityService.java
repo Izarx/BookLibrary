@@ -1,7 +1,9 @@
 package com.softserveinc.booklibrary.service.impl;
 
+import java.io.Serializable;
+
 import com.softserveinc.booklibrary.dao.EntityRepository;
-import com.softserveinc.booklibrary.entity.EntityLibrary;
+import com.softserveinc.booklibrary.entity.MyAppEntity;
 import com.softserveinc.booklibrary.exception.NotValidEntityException;
 import com.softserveinc.booklibrary.exception.NotValidIdException;
 import com.softserveinc.booklibrary.service.EntityService;
@@ -9,10 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class AbstractEntityService<T extends EntityLibrary<K>, K> implements EntityService<T, K> {
+public abstract class AbstractEntityService<T extends MyAppEntity<K>, K extends Serializable> implements EntityService<T, K> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractEntityService.class);
-	protected EntityRepository<T, K> repository;
+	protected EntityRepository<T> repository;
 
 	@Override
 	@Transactional

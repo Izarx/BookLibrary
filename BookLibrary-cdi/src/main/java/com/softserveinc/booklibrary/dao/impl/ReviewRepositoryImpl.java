@@ -7,7 +7,7 @@ import com.softserveinc.booklibrary.entity.Review;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ReviewRepositoryImpl extends AbstractEntityRepository<Review, Integer> implements ReviewRepository {
+public class ReviewRepositoryImpl extends AbstractEntityRepository<Review> implements ReviewRepository {
 
 	private final BookRepository bookRepository;
 
@@ -26,7 +26,6 @@ public class ReviewRepositoryImpl extends AbstractEntityRepository<Review, Integ
 		if (rating == null || rating < 1 || rating > 5) {
 			return false;
 		}
-		return book != null && book.getBookId() != null &&
-				bookRepository.getById(book.getBookId()) != null && bookRepository.isEntityValid(book);
+		return book != null && book.getBookId() != null;
 	}
 }

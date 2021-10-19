@@ -1,12 +1,13 @@
 package com.softserveinc.booklibrary.dao.impl;
 
+import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.softserveinc.booklibrary.dao.EntityRepository;
-import com.softserveinc.booklibrary.entity.EntityLibrary;
+import com.softserveinc.booklibrary.entity.MyAppEntity;
 import com.softserveinc.booklibrary.exception.NotValidEntityException;
 import com.softserveinc.booklibrary.exception.NotValidIdException;
 import org.slf4j.Logger;
@@ -14,14 +15,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class AbstractEntityRepository<T extends EntityLibrary<K>, K> implements EntityRepository<T, K> {
+public abstract class AbstractEntityRepository<T extends MyAppEntity<? extends Serializable>> implements EntityRepository<T> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractEntityRepository.class);
 	private final Class<T> type;
 	@PersistenceContext
 	protected EntityManager entityManager;
 
-	public AbstractEntityRepository() {
+	protected AbstractEntityRepository() {
 		type = (Class<T>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
@@ -32,7 +33,7 @@ public abstract class AbstractEntityRepository<T extends EntityLibrary<K>, K> im
 		if (!isEntityValid(entity)) {
 			throw new NotValidEntityException();
 		}
-		K id = entity.getEntityId();
+		Serializable id = entity.getEntityId();
 		if (id != null) {
 			throw new NotValidIdException(id);
 		}
@@ -46,7 +47,7 @@ public abstract class AbstractEntityRepository<T extends EntityLibrary<K>, K> im
 		if (!isEntityValid(entity)) {
 			throw new NotValidEntityException();
 		}
-		K id = entity.getEntityId();
+		Serializable id = entity.getEntityId();
 		if (id == null || entityManager.find(type, id) == null) {
 			throw new NotValidIdException(id);
 		}
@@ -54,7 +55,7 @@ public abstract class AbstractEntityRepository<T extends EntityLibrary<K>, K> im
 	}
 
 	@Override
-	public T getById(K id) {
+	public T getById(Serializable id) {
 		if (id == null) {
 			throw new NotValidIdException(null);
 		}
@@ -63,7 +64,7 @@ public abstract class AbstractEntityRepository<T extends EntityLibrary<K>, K> im
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY)
-	public boolean delete(K id) {
+	public boolean delete(Serializable id) {
 		if (id == null) {
 			return false;
 		}
