@@ -2,6 +2,6 @@ package com.softserveinc.booklibrary.service;
 
 import com.softserveinc.booklibrary.entity.Author;
 
-public interface AuthorService extends EntityService<Author, Integer> {
+public interface AuthorService extends EntityService<Author> {
 
 }

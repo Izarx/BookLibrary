@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class AbstractEntityService<T extends MyAppEntity<K>, K extends Serializable> implements EntityService<T, K> {
+public abstract class AbstractEntityService<T extends MyAppEntity<? extends Serializable>> implements EntityService<T> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractEntityService.class);
 	protected EntityRepository<T> repository;
@@ -22,7 +22,7 @@ public abstract class AbstractEntityService<T extends MyAppEntity<K>, K extends 
 		if (!repository.isEntityValid(entity)) {
 			throw new NotValidEntityException();
 		}
-		K id = entity.getEntityId();
+		Serializable id = entity.getEntityId();
 		if (id != null) {
 			throw new NotValidIdException(id);
 		}
@@ -35,7 +35,7 @@ public abstract class AbstractEntityService<T extends MyAppEntity<K>, K extends 
 		if (!repository.isEntityValid(entity)) {
 			throw new NotValidEntityException();
 		}
-		K id = entity.getEntityId();
+		Serializable id = entity.getEntityId();
 		if (id == null || repository.getById(id) == null) {
 			throw new NotValidIdException(id);
 		}
@@ -43,7 +43,7 @@ public abstract class AbstractEntityService<T extends MyAppEntity<K>, K extends 
 	}
 
 	@Override
-	public T getById(K id) {
+	public T getById(Serializable id) {
 		if (id == null) {
 			throw new NotValidIdException(null);
 		}
@@ -52,7 +52,7 @@ public abstract class AbstractEntityService<T extends MyAppEntity<K>, K extends 
 
 	@Override
 	@Transactional
-	public boolean delete(K id) {
+	public boolean delete(Serializable id) {
 		if (id == null) {
 			return false;
 		}

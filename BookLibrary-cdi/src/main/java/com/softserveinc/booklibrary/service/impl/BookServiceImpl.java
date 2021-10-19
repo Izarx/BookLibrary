@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BookServiceImpl extends AbstractEntityService<Book, Integer> implements BookService {
+public class BookServiceImpl extends AbstractEntityService<Book> implements BookService {
 
 	@Autowired
 	public BookServiceImpl(BookRepository bookRepository) {
