@@ -1,0 +1,18 @@
+<nav class="nav-list">
+	<h1>
+		<a [routerLink]="['/']">Book Library</a>
+	</h1>
+	<div>
+		<ul>
+			<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+				<a [routerLink]="['/']">Home</a>
+			</li>
+			<li routerLinkActive="active"><a [routerLink]="['/authors']">Authors</a></li>
+			<li routerLinkActive="active"><a [routerLink]="['/books']">Books</a></li>
+
+		</ul>
+	</div>
+</nav>
+<div>
+	<router-outlet></router-outlet>
+</div>
