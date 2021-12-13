@@ -127,7 +127,6 @@ public class BookController {
 			bookDtoResponseData.setTotalElements(responseData.getTotalElements());
 			List<Book> content = responseData.getContent();
 			bookDtoResponseData.setContent(appMapper.listBooksToListBooksDto(content));
-			bookDtoResponseData.getContent().forEach(b -> b.setAuthors(b.getAuthors().stream().sorted(Comparator.comparingInt(AuthorDto::getAuthorId)).collect(Collectors.toList())));
 		}
 		else {
 			LOGGER.warn("Converting Response Data with Books to Response Data with Books DTOs, BookController, " +

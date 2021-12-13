@@ -32,7 +32,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 public abstract class AbstractEntityRepository<T extends AbstractEntity<? extends Serializable>, V> implements EntityRepository<T, V> {
-	// todo: must use LOGGER
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractEntityRepository.class);
 	private final Class<T> type;
 	@PersistenceContext
@@ -115,7 +114,7 @@ public abstract class AbstractEntityRepository<T extends AbstractEntity<? extend
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public List<T> getAll() {
 		CriteriaQuery<T> criteriaQuery = entityManager.getCriteriaBuilder().createQuery(type);
-		criteriaQuery.select(criteriaQuery.from(type)); // todo: redundant variable getAll
+		criteriaQuery.select(criteriaQuery.from(type));
 		return entityManager.createQuery(criteriaQuery).getResultList();
 	}
 
@@ -125,24 +124,12 @@ public abstract class AbstractEntityRepository<T extends AbstractEntity<? extend
 		LOGGER.info("Getting Filtered Sorted Page of {}, {}", type.getSimpleName(), getClass().getSimpleName());
 		ResponseData<T> responseData = new ResponseData<>();
 		int pageSize = requestOptions.getPageSize();
-		// todo: redundant variable pageNumber
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
 		CriteriaQuery<T> criteriaQuery = builder.createQuery(type);
 		Root<T> rootEntity = criteriaQuery.from(type);
-
-		// todo: redundant variable selectEntities
-
-
-		// todo: why this check here? Need to do this check inside getFilteringParams
-//		if (requestOptions.getFilteredEntity() != null) { // todo: why is using ObjectUtils.isNotEmpty instead of simple null check?
-//			List<Predicate> predicates = new ArrayList<>(); // todo: redundant variable here - move it inside 'if'
-//			predicates = getFilteringParams(requestOptions, builder, rootEntity);
-//		}
-
-
-		criteriaQuery.where(getFilteringParams(requestOptions, builder, rootEntity).toArray(new Predicate[]{}));     // todo move inside 'if'
-		responseData.setTotalElements(getCountEntities(requestOptions, builder));
+		criteriaQuery.where(getFilteringParams(requestOptions, builder, rootEntity).toArray(new Predicate[]{}));
+		responseData.setTotalElements(getCountOfEntities(requestOptions, builder));
 		LOGGER.info("Getting Filtered Sorted Page of {}, {}, {} objects were found in DB according to request options", type.getSimpleName(), getClass().getSimpleName(), responseData.getTotalElements());
 		criteriaQuery.orderBy(setOrdersByColumns(requestOptions.getSorting(), builder, rootEntity));
 		List<T> getAll = entityManager
@@ -211,7 +198,7 @@ public abstract class AbstractEntityRepository<T extends AbstractEntity<? extend
 		List<Order> orderList = new ArrayList<>();
 		if (CollectionUtils.isNotEmpty(sortableColumns)) {
 			for (SortableColumn column : sortableColumns) {
-				if (SortingDirection.ASC == column.getDirection()) {  // todo: why still is using string for "asc" and "desc"? Enum!
+				if (SortingDirection.ASC == column.getDirection()) {
 					orderList.add(builder.asc(rootEntity.get(column.getName())));
 				} else if (SortingDirection.DESC == column.getDirection()) {
 					orderList.add(builder.desc(rootEntity.get(column.getName())));
@@ -239,18 +226,12 @@ public abstract class AbstractEntityRepository<T extends AbstractEntity<? extend
 		return Collections.emptyList();
 	}
 
-	public Integer getCountEntities(RequestOptions<V> options,    // todo: please rename this method to more understandable name
-	                                CriteriaBuilder builder) {
+	public Integer getCountOfEntities(RequestOptions<V> options,
+	                                  CriteriaBuilder builder) {
 		CriteriaQuery<Long> countCriteriaQuery = builder.createQuery(Long.class);   // todo: not use Long here
 		Root<T> rootEntity = countCriteriaQuery.from(type);
 		countCriteriaQuery.select(builder.count(rootEntity));
 		countCriteriaQuery.where(getFilteringParams(options, builder, rootEntity).toArray(new Predicate[]{}));
-
-//		// todo: why this check here? Need to do this check inside getFilteringParams
-//		if (options.getFilteredEntity() != null) {  // todo: why is using ObjectUtils.isNotEmpty instead of simple null check?
-//			entityManager.createQuery(countCriteriaQuery);  // todo what is reason?
-//		}
-
 		return entityManager.createQuery(countCriteriaQuery).getSingleResult().intValue();
 	}
 

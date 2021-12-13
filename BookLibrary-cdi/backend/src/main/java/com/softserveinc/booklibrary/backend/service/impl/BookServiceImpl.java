@@ -1,5 +1,11 @@
 package com.softserveinc.booklibrary.backend.service.impl;
 
+import java.util.Comparator;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
+import com.softserveinc.booklibrary.backend.dto.AuthorDto;
+import com.softserveinc.booklibrary.backend.entity.Author;
 import com.softserveinc.booklibrary.backend.entity.Book;
 import com.softserveinc.booklibrary.backend.pagination.RequestOptions;
 import com.softserveinc.booklibrary.backend.pagination.ResponseData;
@@ -23,8 +29,7 @@ public class BookServiceImpl extends AbstractEntityService<Book, BookFilter> imp
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public ResponseData<Book> listEntities(RequestOptions<BookFilter> requestOptions) {
 		ResponseData<Book> bookResponseData = super.listEntities(requestOptions);
-		// todo: need to add sorting authors by name
-		bookResponseData.getContent().forEach(b -> b.getAuthors().size());
+		bookResponseData.getContent().forEach(b -> b.setAuthors(b.getAuthors().stream().collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(Author::getFirstName))))));
 		return bookResponseData;
 	}
 

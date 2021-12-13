@@ -8,6 +8,6 @@ import lombok.Setter;
 public class SortableColumn {
 
 	private String name;
-	private SortingDirection direction;   // todo: Enum!
+	private SortingDirection direction;
 
 }
